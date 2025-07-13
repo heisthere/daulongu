@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daulongu - multi translator</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <script>
+      function getRandomColor() {
+        // Generates a random hex color
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      // Apply the random color to the element
+      document.getElementById("myBox").style.color = getRandomColor();
+    </script>
+
+    {% if result %}
+        <h3>Translations:</h3>
+        <table style="border: none; border-collapse: collapse;">
+            {% for key, value in result.items() %}
+            {% if loop.first %}
+             <tr>
+                <td style="background-color: #4682b4; color: white; padding: 8px;" class="key"><strong>{{ key }}</strong></td>
+                {% for item in value %}
+                <td style="background-color: #468255; color: white; padding: 8px; border: none;"><strong>{{ item }}</strong></td>
+                {% endfor %}
+            </tr>
+            {% else %}
+            <tr>
+                <td style="background-color: #4682b4; color: white; padding: 8px; border: none;"  class="key"><strong>{{ key }}</strong></td>
+                {% for item in value %}
+                <td style="border: none;">{{ item }}</td>
+                {% endfor %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    {% endif %}
+    <a href="{{ url_for('decompose_article') }}">Back to sentences</a>
+</body>
+</html>

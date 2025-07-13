@@ -19,47 +19,11 @@
     </style>
 </head>
 <body>
-    <script>
-      function getRandomColor() {
-        // Generates a random hex color
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
-
-      // Apply the random color to the element
-      document.getElementById("myBox").style.color = getRandomColor();
-    </script>
-
     <h2>Enter Text</h2>
-    <form method="post">
-        <input type="text" name="user_input" required>
+    <form method="post" action="/submit">
+        <textarea id="article" name="article" rows="10" cols="50" placeholder="Paste or type your article here..." required></textarea>
+        <br>
         <button type="submit">Submit</button>
     </form>
-    {% if result %}
-        <h3>Result:</h3>
-        <table style="border: none; border-collapse: collapse;">
-            {% for key, value in result.items() %}
-            {% if loop.first %}
-             <tr>
-                <td style="background-color: #4682b4; color: white; padding: 8px;" class="key"><strong>{{ key }}</strong></td>
-                {% for item in value %}
-                <td style="background-color: #468255; color: white; padding: 8px; border: none;"><strong>{{ item }}</strong></td>
-                {% endfor %}
-            </tr>
-            {% else %}
-            <tr>
-                <td style="background-color: #4682b4; color: white; padding: 8px; border: none;"  class="key"><strong>{{ key }}</strong></td>
-                {% for item in value %}
-                <td style="border: none;">{{ item }}</td>
-                {% endfor %}
-            </tr>
-            {% endif %}
-            {% endfor %}
-        </table>
-    {% endif %}
 </body>
 </html>
